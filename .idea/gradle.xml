@@ -26,7 +26,6 @@
           </compositeBuild>
         </compositeConfiguration>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="$PROJECT_DIR$/../../../../Binaries/gradle-8.7" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
@@ -37,9 +36,21 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/GuardianCommon" name="GuardianCommon">
+                <projects>
+                  <project path="$PROJECT_DIR$/GuardianCommon" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
         <option name="externalProjectPath" value="$PROJECT_DIR$/versions/fabric-1.20.4" />
         <option name="modules">
           <set>
+            <option value="$PROJECT_DIR$/GuardianCommon" />
             <option value="$PROJECT_DIR$/versions/fabric-1.20.4" />
           </set>
         </option>

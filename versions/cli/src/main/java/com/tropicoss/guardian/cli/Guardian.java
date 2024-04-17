@@ -1,20 +1,17 @@
 package com.tropicoss.guardian.cli;
 
-import com.tropicoss.guardian.cli.discord.events.UserAdapter;
-import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.requests.GatewayIntent;
+import com.tropicoss.guardian.common.config.ConfigManager;
+
+import java.io.IOException;
+import java.nio.file.Path;
 
 public class Guardian {
 
-    public static void main(String[] args)
-    {
-        JDA jda = JDABuilder.createDefault("token")
-                .enableIntents(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MEMBERS)
-                .build();
-        //You can also add event listeners to the already built JDA instance
-        // Note that some events may not be received if the listener is added after calling build()
-        // This includes events such as the ReadyEvent
-        jda.addEventListener(new UserAdapter());
+    public static void main(String[] args) throws IOException {
+        ConfigManager configManager =  new ConfigManager(Path.of("config.json"));
+
+        configManager.loadConfig();
+
+        System.out.println(configManager.getConfigData().getBotConfig().token);
     }
 }
