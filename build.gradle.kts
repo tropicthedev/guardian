@@ -15,7 +15,7 @@ tasks.register("build") {
     gradle.includedBuilds.forEach {
         if (it.name == "GuardianCommon") return@forEach
 
-        dependsOn(it.task(":release"))
+//        dependsOn(it.task(":release"))
     }
 }
 
