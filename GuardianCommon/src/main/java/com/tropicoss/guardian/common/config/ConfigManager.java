@@ -12,9 +12,10 @@ public class ConfigManager {
     private final Gson gson; // Reuse a single Gson instance
     private ConfigData configData;
 
-    public ConfigManager(Path configFilePath) {
+    public ConfigManager(Path configFilePath) throws IOException {
         this.configFilePath = configFilePath;
         this.gson = new Gson(); // Initialize Gson here
+        loadConfig();
     }
 
     public void loadConfig() throws IOException {

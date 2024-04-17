@@ -4,21 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3001544c-a64c-443c-ab00-98f9b4331db3" name="Changes" comment="Initial Commit">
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/GuardianConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/config/BotConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/config/ConfigManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/config/DatabaseConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/config/ServerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="3001544c-a64c-443c-ab00-98f9b4331db3" name="Changes" comment="Updated Common Package">
+      <change afterPath="$PROJECT_DIR$/versions/cli/src/main/java/com/tropicoss/guardian/cli/discord/commands/OnboardingCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GuardianCommon/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/versions/cli/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/versions/cli/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/versions/cli/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/versions/cli/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/config/BotConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/config/BotConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/config/ConfigManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/config/ConfigManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/versions/cli/src/main/java/com/tropicoss/guardian/cli/Guardian.java" beforeDir="false" afterPath="$PROJECT_DIR$/versions/cli/src/main/java/com/tropicoss/guardian/cli/Guardian.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/versions/fabric-1.20.4/.idea/runConfigurations/Minecraft_Server.xml" beforeDir="false" afterPath="$PROJECT_DIR$/versions/fabric-1.20.4/.idea/runConfigurations/Minecraft_Server.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/versions/fabric-1.20.4/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/versions/fabric-1.20.4/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/versions/cli/src/main/java/com/tropicoss/guardian/cli/discord/events/UserAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/versions/cli/src/main/java/com/tropicoss/guardian/cli/discord/events/UserAdapter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -251,11 +243,20 @@
       <option name="project" value="LOCAL" />
       <updated>1713210481527</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Updated Common Package">
+      <option name="closed" value="true" />
+      <created>1713319707668</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1713319707668</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial Commit" />
+    <MESSAGE value="Updated Common Package" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Common Package" />
   </component>
 </project>
