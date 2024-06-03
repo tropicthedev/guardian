@@ -75,4 +75,12 @@ public class ApplicationResponse {
         this.status = status;
         this.modifiedAt = LocalDateTime.now();
     }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setModifiedAt(LocalDateTime modifiedAt) {
+        this.modifiedAt = modifiedAt;
+    }
 }

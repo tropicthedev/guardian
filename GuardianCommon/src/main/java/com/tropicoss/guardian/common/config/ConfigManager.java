@@ -1,6 +1,7 @@
 package com.tropicoss.guardian.common.config;
 
 import com.google.gson.Gson;
+import com.tropicoss.guardian.common.database.model.Server;
 
 import java.nio.file.Path;
 import java.nio.file.Files;
@@ -43,9 +44,11 @@ public class ConfigManager {
 
     public static class ConfigData {
         private final BotConfig bot = new BotConfig();
+        private final ServerConfig server = new ServerConfig();
 
         public BotConfig getBotConfig() {
             return bot;
         }
+        public ServerConfig getServerConfig() {return server;}
     }
 }

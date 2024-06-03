@@ -38,6 +38,14 @@ public class Member {
         return modifiedAt;
     }
 
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setModifiedAt(LocalDateTime modifiedAt) {
+        this.modifiedAt = modifiedAt;
+    }
+
     public void setMemberId(int memberId) {
         this.memberId = memberId;
         this.modifiedAt = LocalDateTime.now();

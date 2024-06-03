@@ -1,0 +1,120 @@
+package com.tropicoss.guardian.common.database.dao.impl;
+
+import com.tropicoss.guardian.common.database.DatabaseConnection;
+import com.tropicoss.guardian.common.database.dao.MojangAccountDAO;
+import com.tropicoss.guardian.common.database.model.MojangAccount;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MojangAccountDAOImpl implements MojangAccountDAO {
+    private final DatabaseConnection databaseConnection;
+
+    public MojangAccountDAOImpl(DatabaseConnection databaseConnection) {
+        this.databaseConnection = databaseConnection;
+    }
+
+    @Override
+    public void addMojangAccount(MojangAccount mojangAccount) {
+        String sql = "INSERT INTO mojang_accounts (mojangAccountId, memberId, mojangId, createdAt, modifiedAt) VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection conn = databaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, mojangAccount.getMojangAccountId());
+            stmt.setInt(2, mojangAccount.getMemberId());
+            stmt.setInt(3, mojangAccount.getMojangId());
+            stmt.setTimestamp(4, Timestamp.valueOf(mojangAccount.getCreatedAt()));
+            stmt.setTimestamp(5, Timestamp.valueOf(mojangAccount.getModifiedAt()));
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public MojangAccount getMojangAccountById(int mojangAccountId) {
+        String sql = "SELECT * FROM mojang_accounts WHERE mojangAccountId = ?";
+        MojangAccount mojangAccount = null;
+
+        try (Connection conn = databaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, mojangAccountId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                mojangAccount = new MojangAccount();
+                mojangAccount.setMojangAccountId(rs.getInt("mojangAccountId"));
+                mojangAccount.setMemberId(rs.getInt("memberId"));
+                mojangAccount.setMojangId(rs.getInt("mojangId"));
+                mojangAccount.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
+                mojangAccount.setModifiedAt(rs.getTimestamp("modifiedAt").toLocalDateTime());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return mojangAccount;
+    }
+
+    @Override
+    public List<MojangAccount> getAllMojangAccounts() {
+        String sql = "SELECT * FROM mojang_accounts";
+        List<MojangAccount> mojangAccounts = new ArrayList<>();
+
+        try (Connection conn = databaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                MojangAccount mojangAccount = new MojangAccount();
+                mojangAccount.setMojangAccountId(rs.getInt("mojangAccountId"));
+                mojangAccount.setMemberId(rs.getInt("memberId"));
+                mojangAccount.setMojangId(rs.getInt("mojangId"));
+                mojangAccount.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
+                mojangAccount.setModifiedAt(rs.getTimestamp("modifiedAt").toLocalDateTime());
+
+                mojangAccounts.add(mojangAccount);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return mojangAccounts;
+    }
+
+    @Override
+    public void updateMojangAccount(MojangAccount mojangAccount) {
+        String sql = "UPDATE mojang_accounts SET memberId = ?, mojangId = ?, modifiedAt = ? WHERE mojangAccountId = ?";
+
+        try (Connection conn = databaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, mojangAccount.getMemberId());
+            stmt.setInt(2, mojangAccount.getMojangId());
+            stmt.setTimestamp(3, Timestamp.valueOf(mojangAccount.getModifiedAt()));
+            stmt.setInt(4, mojangAccount.getMojangAccountId());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteMojangAccount(int mojangAccountId) {
+        String sql = "DELETE FROM mojang_accounts WHERE mojangAccountId = ?";
+
+        try (Connection conn = databaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, mojangAccountId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}

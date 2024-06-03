@@ -37,4 +37,16 @@ public class Interview {
     public LocalDateTime getModifiedAt() {
         return modifiedAt;
     }
+
+    public void setModifiedAt(LocalDateTime modifiedAt) {
+        this.modifiedAt = modifiedAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setApplicationId(int applicationId) {
+        this.applicationId = applicationId;
+    }
 }

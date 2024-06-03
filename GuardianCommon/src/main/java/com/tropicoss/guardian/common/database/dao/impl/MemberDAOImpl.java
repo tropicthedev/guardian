@@ -1,0 +1,120 @@
+package com.tropicoss.guardian.common.database.dao.impl;
+
+import com.tropicoss.guardian.common.database.DatabaseConnection;
+import com.tropicoss.guardian.common.database.dao.MemberDAO;
+import com.tropicoss.guardian.common.database.model.Member;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MemberDAOImpl implements MemberDAO {
+    private final DatabaseConnection databaseConnection;
+
+    public MemberDAOImpl(DatabaseConnection databaseConnection) {
+        this.databaseConnection = databaseConnection;
+    }
+
+    @Override
+    public void addMember(Member member) {
+        String sql = "INSERT INTO members (memberId, discordId, isAdmin, createdAt, modifiedAt) VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection conn = databaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, member.getMemberId());
+            stmt.setString(2, member.getDiscordId());
+            stmt.setBoolean(3, member.getIsAdmin());
+            stmt.setTimestamp(4, Timestamp.valueOf(member.getCreatedAt()));
+            stmt.setTimestamp(5, Timestamp.valueOf(member.getModifiedAt()));
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public Member getMemberById(int memberId) {
+        String sql = "SELECT * FROM members WHERE memberId = ?";
+        Member member = null;
+
+        try (Connection conn = databaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, memberId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                member = new Member();
+                member.setMemberId(rs.getInt("memberId"));
+                member.setDiscordId(rs.getString("discordId"));
+                member.setIsAdmin(rs.getBoolean("isAdmin"));
+                member.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
+                member.setModifiedAt(rs.getTimestamp("modifiedAt").toLocalDateTime());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return member;
+    }
+
+    @Override
+    public List<Member> getAllMembers() {
+        String sql = "SELECT * FROM members";
+        List<Member> members = new ArrayList<>();
+
+        try (Connection conn = databaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                Member member = new Member();
+                member.setMemberId(rs.getInt("memberId"));
+                member.setDiscordId(rs.getString("discordId"));
+                member.setIsAdmin(rs.getBoolean("isAdmin"));
+                member.setCreatedAt(rs.getTimestamp("createdAt").toLocalDateTime());
+                member.setModifiedAt(rs.getTimestamp("modifiedAt").toLocalDateTime());
+
+                members.add(member);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return members;
+    }
+
+    @Override
+    public void updateMember(Member member) {
+        String sql = "UPDATE members SET discordId = ?, isAdmin = ?, modifiedAt = ? WHERE memberId = ?";
+
+        try (Connection conn = databaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, member.getDiscordId());
+            stmt.setBoolean(2, member.getIsAdmin());
+            stmt.setTimestamp(3, Timestamp.valueOf(member.getModifiedAt()));
+            stmt.setInt(4, member.getMemberId());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteMember(int memberId) {
+        String sql = "DELETE FROM members WHERE memberId = ?";
+
+        try (Connection conn = databaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, memberId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}

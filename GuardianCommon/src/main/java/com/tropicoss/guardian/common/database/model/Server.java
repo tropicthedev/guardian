@@ -53,4 +53,12 @@ public class Server {
     public LocalDateTime getModifiedAt() {
         return modifiedAt;
     }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setModifiedAt(LocalDateTime modifiedAt) {
+        this.modifiedAt = modifiedAt;
+    }
 }

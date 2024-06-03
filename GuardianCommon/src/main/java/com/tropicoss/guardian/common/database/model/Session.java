@@ -46,6 +46,10 @@ public class Session {
         this.sessionEnd = sessionEnd;
     }
 
+    public void setSessionStart(LocalDateTime sessionStart) {
+        this.sessionStart = sessionStart;
+    }
+
     public LocalDateTime getSessionStart() {
         return sessionStart;
     }

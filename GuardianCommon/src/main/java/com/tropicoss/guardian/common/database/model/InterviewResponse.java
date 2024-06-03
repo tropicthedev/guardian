@@ -69,6 +69,18 @@ public class InterviewResponse {
         this.content = content;
         this.modifiedAt = LocalDateTime.now();
     }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setModifiedAt(LocalDateTime modifiedAt) {
+        this.modifiedAt = modifiedAt;
+    }
 }
 
 

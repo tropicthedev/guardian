@@ -50,4 +50,12 @@ public class MojangAccount {
         this.mojangId = mojangId;
         this.modifiedAt = LocalDateTime.now();
     }
+
+    public void setModifiedAt(LocalDateTime modifiedAt) {
+        this.modifiedAt = modifiedAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 }
