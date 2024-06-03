@@ -9,8 +9,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 public class InterviewResponseDAOImpl implements InterviewResponseDAO {
     private final DatabaseConnection databaseConnection;
+    public static final Logger LOGGER = LoggerFactory.getLogger("Guardian");
 
     public InterviewResponseDAOImpl(DatabaseConnection databaseConnection) {
         this.databaseConnection = databaseConnection;
@@ -33,7 +38,7 @@ public class InterviewResponseDAOImpl implements InterviewResponseDAO {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -59,7 +64,7 @@ public class InterviewResponseDAOImpl implements InterviewResponseDAO {
                 interviewResponse.setModifiedAt(rs.getTimestamp("modifiedAt").toLocalDateTime());
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
 
         return interviewResponse;
@@ -87,7 +92,7 @@ public class InterviewResponseDAOImpl implements InterviewResponseDAO {
                 interviewResponses.add(interviewResponse);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
 
         return interviewResponses;
@@ -109,7 +114,7 @@ public class InterviewResponseDAOImpl implements InterviewResponseDAO {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -123,7 +128,7 @@ public class InterviewResponseDAOImpl implements InterviewResponseDAO {
             stmt.setInt(1, interviewResponseId);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 }

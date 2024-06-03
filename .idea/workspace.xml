@@ -4,41 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3001544c-a64c-443c-ab00-98f9b4331db3" name="Changes" comment="Updated Database Module">
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/DatabaseConnection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/ApplicationDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/ApplicationResponseDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/InterviewDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/InterviewResponseDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/MemberDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/MojangAccountDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/ServerDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/SessionDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/UserDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/ApplicationDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/ApplicationResponseDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/InterviewDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/InterviewResponseDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/MemberDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/MojangAccountDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/ServerDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/SessionDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/UserDAOImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/versions/cli/src/main/java/com/tropicoss/guardian/cli/api/Web.java" afterDir="false" />
+    <list default="true" id="3001544c-a64c-443c-ab00-98f9b4331db3" name="Changes" comment="Added DAO's for models">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/config/ConfigManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/config/ConfigManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/config/ServerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/config/ServerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/Database.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/model/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/model/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/model/ApplicationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/model/ApplicationResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/model/Interview.java" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/model/Interview.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/model/InterviewResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/model/InterviewResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/model/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/model/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/model/MojangAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/model/MojangAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/model/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/model/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/model/Session.java" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/model/Session.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/versions/cli/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/versions/cli/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/DatabaseConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/ApplicationDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/ApplicationDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/ApplicationResponseDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/ApplicationResponseDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/InterviewDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/InterviewDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/InterviewResponseDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/InterviewResponseDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/MemberDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/MemberDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/MojangAccountDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/MojangAccountDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/ServerDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/ServerDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/SessionDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/SessionDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/UserDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/database/dao/impl/UserDAOImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GuardianCommon/src/main/java/com/tropicoss/guardian/common/logging/Logger.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -293,7 +271,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716043648230</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added DAO's for models">
+      <option name="closed" value="true" />
+      <created>1717385297680</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1717385297680</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -317,6 +303,7 @@
     <MESSAGE value="Added First Bot Command" />
     <MESSAGE value="Udated project" />
     <MESSAGE value="Updated Database Module" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Database Module" />
+    <MESSAGE value="Added DAO's for models" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added DAO's for models" />
   </component>
 </project>

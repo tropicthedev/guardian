@@ -8,8 +8,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 public class ServerDAOImpl implements ServerDAO {
     private final DatabaseConnection databaseConnection;
+    public static final Logger LOGGER = LoggerFactory.getLogger("Guardian");
+
 
     public ServerDAOImpl(DatabaseConnection databaseConnection) {
         this.databaseConnection = databaseConnection;
@@ -30,7 +36,7 @@ public class ServerDAOImpl implements ServerDAO {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -54,7 +60,7 @@ public class ServerDAOImpl implements ServerDAO {
                 server.setModifiedAt(rs.getTimestamp("modifiedAt").toLocalDateTime());
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
 
         return server;
@@ -80,7 +86,7 @@ public class ServerDAOImpl implements ServerDAO {
                 servers.add(server);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
 
         return servers;
@@ -100,7 +106,7 @@ public class ServerDAOImpl implements ServerDAO {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -114,7 +120,7 @@ public class ServerDAOImpl implements ServerDAO {
             stmt.setInt(1, serverId);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 }

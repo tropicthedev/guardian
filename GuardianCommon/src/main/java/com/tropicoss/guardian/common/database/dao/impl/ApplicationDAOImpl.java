@@ -3,6 +3,8 @@ package com.tropicoss.guardian.common.database.dao.impl;
 import com.tropicoss.guardian.common.database.DatabaseConnection;
 import com.tropicoss.guardian.common.database.dao.ApplicationDAO;
 import com.tropicoss.guardian.common.database.model.Application;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ import java.util.List;
 
 public class ApplicationDAOImpl implements ApplicationDAO {
     private final DatabaseConnection databaseConnection;
+    public static final Logger LOGGER = LoggerFactory.getLogger("Guardian");
 
     public ApplicationDAOImpl(DatabaseConnection databaseConnection) {
         this.databaseConnection = databaseConnection;
@@ -30,7 +33,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -54,7 +57,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
                 application.setModifiedAt(rs.getTimestamp("modifiedAt").toLocalDateTime());
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
 
         return application;
@@ -80,7 +83,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
                 applications.add(application);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
 
         return applications;
@@ -100,7 +103,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -114,7 +117,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
             stmt.setInt(1, applicationId);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 }

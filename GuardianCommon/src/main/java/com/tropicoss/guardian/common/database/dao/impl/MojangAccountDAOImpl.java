@@ -8,8 +8,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 public class MojangAccountDAOImpl implements MojangAccountDAO {
     private final DatabaseConnection databaseConnection;
+    public static final Logger LOGGER = LoggerFactory.getLogger("Guardian");
 
     public MojangAccountDAOImpl(DatabaseConnection databaseConnection) {
         this.databaseConnection = databaseConnection;
@@ -30,7 +35,7 @@ public class MojangAccountDAOImpl implements MojangAccountDAO {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -54,7 +59,7 @@ public class MojangAccountDAOImpl implements MojangAccountDAO {
                 mojangAccount.setModifiedAt(rs.getTimestamp("modifiedAt").toLocalDateTime());
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
 
         return mojangAccount;
@@ -80,7 +85,7 @@ public class MojangAccountDAOImpl implements MojangAccountDAO {
                 mojangAccounts.add(mojangAccount);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
 
         return mojangAccounts;
@@ -100,7 +105,7 @@ public class MojangAccountDAOImpl implements MojangAccountDAO {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -114,7 +119,7 @@ public class MojangAccountDAOImpl implements MojangAccountDAO {
             stmt.setInt(1, mojangAccountId);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 }

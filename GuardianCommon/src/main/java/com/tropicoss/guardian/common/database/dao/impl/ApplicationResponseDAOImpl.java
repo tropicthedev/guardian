@@ -8,9 +8,14 @@ import com.tropicoss.guardian.common.database.model.Status;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class ApplicationResponseDAOImpl implements ApplicationResponseDAO {
     private final DatabaseConnection databaseConnection;
+    public static final Logger LOGGER = LoggerFactory.getLogger("Guardian");
+
 
     public ApplicationResponseDAOImpl(DatabaseConnection databaseConnection) {
         this.databaseConnection = databaseConnection;
@@ -33,7 +38,7 @@ public class ApplicationResponseDAOImpl implements ApplicationResponseDAO {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -59,7 +64,7 @@ public class ApplicationResponseDAOImpl implements ApplicationResponseDAO {
                 applicationResponse.setModifiedAt(rs.getTimestamp("modifiedAt").toLocalDateTime());
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
 
         return applicationResponse;
@@ -87,7 +92,7 @@ public class ApplicationResponseDAOImpl implements ApplicationResponseDAO {
                 applicationResponses.add(applicationResponse);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
 
         return applicationResponses;
@@ -109,7 +114,7 @@ public class ApplicationResponseDAOImpl implements ApplicationResponseDAO {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -123,7 +128,7 @@ public class ApplicationResponseDAOImpl implements ApplicationResponseDAO {
             stmt.setInt(1, applicationResponseId);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 }

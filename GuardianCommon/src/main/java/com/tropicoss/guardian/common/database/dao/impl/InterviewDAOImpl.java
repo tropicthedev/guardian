@@ -8,8 +8,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 public class InterviewDAOImpl implements InterviewDAO {
     private final DatabaseConnection databaseConnection;
+    public static final Logger LOGGER = LoggerFactory.getLogger("Guardian");
+
 
     public InterviewDAOImpl(DatabaseConnection databaseConnection) {
         this.databaseConnection = databaseConnection;
@@ -29,7 +35,7 @@ public class InterviewDAOImpl implements InterviewDAO {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -52,7 +58,7 @@ public class InterviewDAOImpl implements InterviewDAO {
                 interview.setModifiedAt(rs.getTimestamp("modifiedAt").toLocalDateTime());
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
 
         return interview;
@@ -77,7 +83,7 @@ public class InterviewDAOImpl implements InterviewDAO {
                 interviews.add(interview);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
 
         return interviews;
@@ -96,7 +102,7 @@ public class InterviewDAOImpl implements InterviewDAO {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -110,7 +116,7 @@ public class InterviewDAOImpl implements InterviewDAO {
             stmt.setInt(1, interviewId);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 }

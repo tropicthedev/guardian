@@ -7,9 +7,14 @@ import com.tropicoss.guardian.common.database.model.User;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class UserDAOImpl implements UserDAO {
     private final DatabaseConnection databaseConnection;
+    public static final Logger LOGGER = LoggerFactory.getLogger("Guardian");
+
 
     public UserDAOImpl(DatabaseConnection databaseConnection) {
         this.databaseConnection = databaseConnection;
@@ -31,7 +36,7 @@ public class UserDAOImpl implements UserDAO {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -56,7 +61,7 @@ public class UserDAOImpl implements UserDAO {
                 user.setUpdatedAt(rs.getTimestamp("updatedAt").toLocalDateTime());
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
 
         return user;
@@ -83,7 +88,7 @@ public class UserDAOImpl implements UserDAO {
                 users.add(user);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
 
         return users;
@@ -104,7 +109,7 @@ public class UserDAOImpl implements UserDAO {
 
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 
@@ -118,7 +123,7 @@ public class UserDAOImpl implements UserDAO {
             stmt.setString(1, userId);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 }
