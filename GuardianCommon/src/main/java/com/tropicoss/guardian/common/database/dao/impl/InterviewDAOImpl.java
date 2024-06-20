@@ -1,6 +1,6 @@
 package com.tropicoss.guardian.common.database.dao.impl;
 
-import com.tropicoss.guardian.common.database.DatabaseConnection;
+import com.tropicoss.guardian.common.database.DatabaseManager;
 import com.tropicoss.guardian.common.database.dao.InterviewDAO;
 import com.tropicoss.guardian.common.database.model.Interview;
 
@@ -13,19 +13,19 @@ import org.slf4j.LoggerFactory;
 
 
 public class InterviewDAOImpl implements InterviewDAO {
-    private final DatabaseConnection databaseConnection;
+    private final DatabaseManager databaseManager;
     public static final Logger LOGGER = LoggerFactory.getLogger("Guardian");
 
 
-    public InterviewDAOImpl(DatabaseConnection databaseConnection) {
-        this.databaseConnection = databaseConnection;
+    public InterviewDAOImpl(DatabaseManager databaseManager) {
+        this.databaseManager = databaseManager;
     }
 
     @Override
     public void addInterview(Interview interview) {
         String sql = "INSERT INTO interviews (interviewId, applicationId, createdAt, modifiedAt) VALUES (?, ?, ?, ?)";
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, interview.getInterviewId());
@@ -44,7 +44,7 @@ public class InterviewDAOImpl implements InterviewDAO {
         String sql = "SELECT * FROM interviews WHERE interviewId = ?";
         Interview interview = null;
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, interviewId);
@@ -69,7 +69,7 @@ public class InterviewDAOImpl implements InterviewDAO {
         String sql = "SELECT * FROM interviews";
         List<Interview> interviews = new ArrayList<>();
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -93,7 +93,7 @@ public class InterviewDAOImpl implements InterviewDAO {
     public void updateInterview(Interview interview) {
         String sql = "UPDATE interviews SET applicationId = ?, modifiedAt = ? WHERE interviewId = ?";
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, interview.getApplicationId());
@@ -110,7 +110,7 @@ public class InterviewDAOImpl implements InterviewDAO {
     public void deleteInterview(int interviewId) {
         String sql = "DELETE FROM interviews WHERE interviewId = ?";
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, interviewId);

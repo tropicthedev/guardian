@@ -1,6 +1,6 @@
 package com.tropicoss.guardian.common.database.dao.impl;
 
-import com.tropicoss.guardian.common.database.DatabaseConnection;
+import com.tropicoss.guardian.common.database.DatabaseManager;
 import com.tropicoss.guardian.common.database.dao.MojangAccountDAO;
 import com.tropicoss.guardian.common.database.model.MojangAccount;
 
@@ -13,18 +13,18 @@ import org.slf4j.LoggerFactory;
 
 
 public class MojangAccountDAOImpl implements MojangAccountDAO {
-    private final DatabaseConnection databaseConnection;
+    private final DatabaseManager databaseManager;
     public static final Logger LOGGER = LoggerFactory.getLogger("Guardian");
 
-    public MojangAccountDAOImpl(DatabaseConnection databaseConnection) {
-        this.databaseConnection = databaseConnection;
+    public MojangAccountDAOImpl(DatabaseManager databaseManager) {
+        this.databaseManager = databaseManager;
     }
 
     @Override
     public void addMojangAccount(MojangAccount mojangAccount) {
         String sql = "INSERT INTO mojang_accounts (mojangAccountId, memberId, mojangId, createdAt, modifiedAt) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, mojangAccount.getMojangAccountId());
@@ -44,7 +44,7 @@ public class MojangAccountDAOImpl implements MojangAccountDAO {
         String sql = "SELECT * FROM mojang_accounts WHERE mojangAccountId = ?";
         MojangAccount mojangAccount = null;
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, mojangAccountId);
@@ -70,7 +70,7 @@ public class MojangAccountDAOImpl implements MojangAccountDAO {
         String sql = "SELECT * FROM mojang_accounts";
         List<MojangAccount> mojangAccounts = new ArrayList<>();
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -95,7 +95,7 @@ public class MojangAccountDAOImpl implements MojangAccountDAO {
     public void updateMojangAccount(MojangAccount mojangAccount) {
         String sql = "UPDATE mojang_accounts SET memberId = ?, mojangId = ?, modifiedAt = ? WHERE mojangAccountId = ?";
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, mojangAccount.getMemberId());
@@ -113,7 +113,7 @@ public class MojangAccountDAOImpl implements MojangAccountDAO {
     public void deleteMojangAccount(int mojangAccountId) {
         String sql = "DELETE FROM mojang_accounts WHERE mojangAccountId = ?";
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, mojangAccountId);

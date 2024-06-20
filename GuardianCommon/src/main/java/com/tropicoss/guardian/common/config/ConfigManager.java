@@ -45,10 +45,12 @@ public class ConfigManager {
     public static class ConfigData {
         private final BotConfig bot = new BotConfig();
         private final ServerConfig server = new ServerConfig();
+        private final DatabaseConfig database = new DatabaseConfig();
 
         public BotConfig getBotConfig() {
             return bot;
         }
         public ServerConfig getServerConfig() {return server;}
+        public DatabaseConfig getDatabaseConfig() {return database;}
     }
 }

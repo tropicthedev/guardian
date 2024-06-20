@@ -1,6 +1,6 @@
 package com.tropicoss.guardian.common.database.dao.impl;
 
-import com.tropicoss.guardian.common.database.DatabaseConnection;
+import com.tropicoss.guardian.common.database.DatabaseManager;
 import com.tropicoss.guardian.common.database.dao.ApplicationDAO;
 import com.tropicoss.guardian.common.database.model.Application;
 import org.slf4j.Logger;
@@ -11,18 +11,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ApplicationDAOImpl implements ApplicationDAO {
-    private final DatabaseConnection databaseConnection;
+    private final DatabaseManager databaseManager;
     public static final Logger LOGGER = LoggerFactory.getLogger("Guardian");
 
-    public ApplicationDAOImpl(DatabaseConnection databaseConnection) {
-        this.databaseConnection = databaseConnection;
+    public ApplicationDAOImpl(DatabaseManager databaseManager) {
+        this.databaseManager = databaseManager;
     }
 
     @Override
     public void addApplication(Application application) {
         String sql = "INSERT INTO applications (applicationId, content, discordId, createdAt, modifiedAt) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, application.getApplicationId());
@@ -32,6 +32,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
             stmt.setTimestamp(5, Timestamp.valueOf(application.getModifiedAt()));
 
             stmt.executeUpdate();
+            conn.commit();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
         }
@@ -42,7 +43,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
         String sql = "SELECT * FROM applications WHERE applicationId = ?";
         Application application = null;
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, applicationId);
@@ -68,7 +69,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
         String sql = "SELECT * FROM applications";
         List<Application> applications = new ArrayList<>();
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -93,7 +94,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
     public void updateApplication(Application application) {
         String sql = "UPDATE applications SET content = ?, discordId = ?, modifiedAt = ? WHERE applicationId = ?";
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, application.getContent());
@@ -111,7 +112,7 @@ public class ApplicationDAOImpl implements ApplicationDAO {
     public void deleteApplication(int applicationId) {
         String sql = "DELETE FROM applications WHERE applicationId = ?";
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, applicationId);

@@ -1,6 +1,6 @@
 package com.tropicoss.guardian.common.database.dao.impl;
 
-import com.tropicoss.guardian.common.database.DatabaseConnection;
+import com.tropicoss.guardian.common.database.DatabaseManager;
 import com.tropicoss.guardian.common.database.dao.MemberDAO;
 import com.tropicoss.guardian.common.database.model.Member;
 
@@ -12,19 +12,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class MemberDAOImpl implements MemberDAO {
-    private final DatabaseConnection databaseConnection;
+    private final DatabaseManager databaseManager;
     public static final Logger LOGGER = LoggerFactory.getLogger("Guardian");
 
 
-    public MemberDAOImpl(DatabaseConnection databaseConnection) {
-        this.databaseConnection = databaseConnection;
+    public MemberDAOImpl(DatabaseManager databaseManager) {
+        this.databaseManager = databaseManager;
     }
 
     @Override
     public void addMember(Member member) {
         String sql = "INSERT INTO members (memberId, discordId, isAdmin, createdAt, modifiedAt) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, member.getMemberId());
@@ -44,7 +44,7 @@ public class MemberDAOImpl implements MemberDAO {
         String sql = "SELECT * FROM members WHERE memberId = ?";
         Member member = null;
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, memberId);
@@ -70,7 +70,7 @@ public class MemberDAOImpl implements MemberDAO {
         String sql = "SELECT * FROM members";
         List<Member> members = new ArrayList<>();
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -95,7 +95,7 @@ public class MemberDAOImpl implements MemberDAO {
     public void updateMember(Member member) {
         String sql = "UPDATE members SET discordId = ?, isAdmin = ?, modifiedAt = ? WHERE memberId = ?";
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, member.getDiscordId());
@@ -113,7 +113,7 @@ public class MemberDAOImpl implements MemberDAO {
     public void deleteMember(int memberId) {
         String sql = "DELETE FROM members WHERE memberId = ?";
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, memberId);

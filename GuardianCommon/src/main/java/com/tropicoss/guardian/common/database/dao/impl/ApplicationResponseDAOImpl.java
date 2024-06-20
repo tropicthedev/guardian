@@ -1,6 +1,6 @@
 package com.tropicoss.guardian.common.database.dao.impl;
 
-import com.tropicoss.guardian.common.database.DatabaseConnection;
+import com.tropicoss.guardian.common.database.DatabaseManager;
 import com.tropicoss.guardian.common.database.dao.ApplicationResponseDAO;
 import com.tropicoss.guardian.common.database.model.ApplicationResponse;
 import com.tropicoss.guardian.common.database.model.Status;
@@ -13,19 +13,19 @@ import org.slf4j.LoggerFactory;
 
 
 public class ApplicationResponseDAOImpl implements ApplicationResponseDAO {
-    private final DatabaseConnection databaseConnection;
+    private final DatabaseManager databaseManager;
     public static final Logger LOGGER = LoggerFactory.getLogger("Guardian");
 
 
-    public ApplicationResponseDAOImpl(DatabaseConnection databaseConnection) {
-        this.databaseConnection = databaseConnection;
+    public ApplicationResponseDAOImpl(DatabaseManager databaseManager) {
+        this.databaseManager = databaseManager;
     }
 
     @Override
     public void addApplicationResponse(ApplicationResponse applicationResponse) {
         String sql = "INSERT INTO application_responses (applicationResponseId, adminId, applicationId, content, status, createdAt, modifiedAt) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, applicationResponse.getApplicationResponseId());
@@ -47,7 +47,7 @@ public class ApplicationResponseDAOImpl implements ApplicationResponseDAO {
         String sql = "SELECT * FROM application_responses WHERE applicationResponseId = ?";
         ApplicationResponse applicationResponse = null;
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, applicationResponseId);
@@ -75,7 +75,7 @@ public class ApplicationResponseDAOImpl implements ApplicationResponseDAO {
         String sql = "SELECT * FROM application_responses";
         List<ApplicationResponse> applicationResponses = new ArrayList<>();
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -102,7 +102,7 @@ public class ApplicationResponseDAOImpl implements ApplicationResponseDAO {
     public void updateApplicationResponse(ApplicationResponse applicationResponse) {
         String sql = "UPDATE application_responses SET adminId = ?, applicationId = ?, content = ?, status = ?, modifiedAt = ? WHERE applicationResponseId = ?";
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, applicationResponse.getAdminId());
@@ -122,7 +122,7 @@ public class ApplicationResponseDAOImpl implements ApplicationResponseDAO {
     public void deleteApplicationResponse(int applicationResponseId) {
         String sql = "DELETE FROM application_responses WHERE applicationResponseId = ?";
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, applicationResponseId);

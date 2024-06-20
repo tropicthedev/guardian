@@ -1,6 +1,6 @@
 package com.tropicoss.guardian.common.database.dao.impl;
 
-import com.tropicoss.guardian.common.database.DatabaseConnection;
+import com.tropicoss.guardian.common.database.DatabaseManager;
 import com.tropicoss.guardian.common.database.dao.SessionDAO;
 import com.tropicoss.guardian.common.database.model.Session;
 
@@ -13,19 +13,19 @@ import org.slf4j.LoggerFactory;
 
 
 public class SessionDAOImpl implements SessionDAO {
-    private final DatabaseConnection databaseConnection;
+    private final DatabaseManager databaseManager;
     public static final Logger LOGGER = LoggerFactory.getLogger("Guardian");
 
 
-    public SessionDAOImpl(DatabaseConnection databaseConnection) {
-        this.databaseConnection = databaseConnection;
+    public SessionDAOImpl(DatabaseManager databaseManager) {
+        this.databaseManager = databaseManager;
     }
 
     @Override
     public void addSession(Session session) {
         String sql = "INSERT INTO sessions (sessionId, memberId, serverId, sessionStart, sessionEnd) VALUES (?, ?, ?, ?, ?)";
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, session.getSessionId());
@@ -45,7 +45,7 @@ public class SessionDAOImpl implements SessionDAO {
         String sql = "SELECT * FROM sessions WHERE sessionId = ?";
         Session session = null;
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, sessionId);
@@ -71,7 +71,7 @@ public class SessionDAOImpl implements SessionDAO {
         String sql = "SELECT * FROM sessions";
         List<Session> sessions = new ArrayList<>();
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -96,7 +96,7 @@ public class SessionDAOImpl implements SessionDAO {
     public void updateSession(Session session) {
         String sql = "UPDATE sessions SET memberId = ?, serverId = ?, sessionEnd = ? WHERE sessionId = ?";
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, session.getMemberId());
@@ -114,7 +114,7 @@ public class SessionDAOImpl implements SessionDAO {
     public void deleteSession(int sessionId) {
         String sql = "DELETE FROM sessions WHERE sessionId = ?";
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, sessionId);

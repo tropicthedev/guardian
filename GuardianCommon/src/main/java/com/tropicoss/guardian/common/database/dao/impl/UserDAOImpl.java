@@ -1,6 +1,6 @@
 package com.tropicoss.guardian.common.database.dao.impl;
 
-import com.tropicoss.guardian.common.database.DatabaseConnection;
+import com.tropicoss.guardian.common.database.DatabaseManager;
 import com.tropicoss.guardian.common.database.dao.UserDAO;
 import com.tropicoss.guardian.common.database.model.User;
 
@@ -12,19 +12,19 @@ import org.slf4j.LoggerFactory;
 
 
 public class UserDAOImpl implements UserDAO {
-    private final DatabaseConnection databaseConnection;
+    private final DatabaseManager databaseManager;
     public static final Logger LOGGER = LoggerFactory.getLogger("Guardian");
 
 
-    public UserDAOImpl(DatabaseConnection databaseConnection) {
-        this.databaseConnection = databaseConnection;
+    public UserDAOImpl(DatabaseManager databaseManager) {
+        this.databaseManager = databaseManager;
     }
 
     @Override
     public void addUser(User user) {
         String sql = "INSERT INTO users (userId, username, discriminator, accessToken, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, user.getUserId());
@@ -45,7 +45,7 @@ public class UserDAOImpl implements UserDAO {
         String sql = "SELECT * FROM users WHERE userId = ?";
         User user = null;
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, userId);
@@ -72,7 +72,7 @@ public class UserDAOImpl implements UserDAO {
         String sql = "SELECT * FROM users";
         List<User> users = new ArrayList<>();
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
@@ -98,7 +98,7 @@ public class UserDAOImpl implements UserDAO {
     public void updateUser(User user) {
         String sql = "UPDATE users SET username = ?, discriminator = ?, accessToken = ?, updatedAt = ? WHERE userId = ?";
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, user.getUsername());
@@ -117,7 +117,7 @@ public class UserDAOImpl implements UserDAO {
     public void deleteUser(String userId) {
         String sql = "DELETE FROM users WHERE userId = ?";
 
-        try (Connection conn = databaseConnection.getConnection();
+        try (Connection conn = databaseManager.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, userId);
